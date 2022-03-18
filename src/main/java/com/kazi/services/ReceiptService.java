@@ -26,6 +26,10 @@ public class ReceiptService {
      * Naively implemented "String" receipt generator, based on a given order
      */
     public String generateReceipt(Order order, PricePolicy pricePolicy) {
+        if (order == null || pricePolicy == null) {
+            throw new IllegalArgumentException("Can not generate receipt some parameters are null");
+        }
+
         StringBuilder receipt = new StringBuilder("------ RECEIPT -------")
                         .append("\n")
                         .append("Order ID: " + order.getId())

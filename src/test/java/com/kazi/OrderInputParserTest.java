@@ -22,6 +22,7 @@ class OrderInputParserTest {
         return Stream.of(
                         Arguments.of(new Order(List.of(new OrderItem(1, List.of(2, 3)))), new String[] { "1,2,3" }),
                         Arguments.of(new Order(List.of(new OrderItem(1, List.of()))), new String[] { "1" }),
+                        Arguments.of(new Order(List.of(new OrderItem(99, List.of()))), new String[] { "99" }),
                         Arguments.of(new Order(List.of(new OrderItem(1, List.of(2, 2)))), new String[] { "1,2,2" }),
                         Arguments.of(new Order(List.of(new OrderItem(1, List.of(2)))), new String[] { " 1 , 2" }),
                         Arguments.of(new Order(List.of(new OrderItem(1, List.of(2, 3)), new OrderItem(3, List.of()))), new String[] { "1,2,3", "3" })
@@ -40,7 +41,7 @@ class OrderInputParserTest {
     }
 
     @Test
-    void shouldThrowExceptionWhenEmptyList() {
+    void shouldThrowExceptionWhenEmptyOrder() {
         //  given
         String input[] = new String[] { "" };
         //  when

@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class OfferingTest {
+class ItemTest {
 
     private static Stream<Arguments> invalidInput() {
         return Stream.of(
@@ -29,8 +29,14 @@ class OfferingTest {
     @MethodSource("invalidInput")
     void invalid(Integer id, String name, Type type, BigDecimal price, String message) {
         //  when
-        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new Offering(id, name, type, price));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new DummyItem(id, name, type, price));
         assertEquals(message, ex.getMessage());
+    }
+
+    class DummyItem extends Item {
+        public DummyItem(Integer id, String name, Type type, BigDecimal price) {
+            super(id, name, type, price);
+        }
     }
 
 }
