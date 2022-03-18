@@ -1,6 +1,6 @@
 # 3c App (Charlene's Coffee Corner)
 
-A simple program accepting list of products and generating a receipt. Full specification can be found [here](/SPEC.MD)
+A simple program accepting list of products and generating a receipt. Full specification can be found [here](SPEC.md)
 
 # Thinking process / decision records
 
