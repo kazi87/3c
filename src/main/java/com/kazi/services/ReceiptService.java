@@ -17,17 +17,15 @@ import java.util.Optional;
 public class ReceiptService {
 
     private final InventoryRepository inventoryRepository;
-    private final PricePolicy pricePolicy;
 
-    public ReceiptService(InventoryRepository inventoryRepository, PricePolicy pricePolicy) {
+    public ReceiptService(InventoryRepository inventoryRepository) {
         this.inventoryRepository = inventoryRepository;
-        this.pricePolicy = pricePolicy;
     }
 
     /**
      * Naively implemented "String" receipt generator, based on a given order
      */
-    public String generateReceipt(Order order) {
+    public String generateReceipt(Order order, PricePolicy pricePolicy) {
         StringBuilder receipt = new StringBuilder("------ RECEIPT -------")
                         .append("\n")
                         .append("Order ID: " + order.getId())
@@ -78,11 +76,11 @@ public class ReceiptService {
     }
 
     private String formatExtra(Extra e) {
-        return String.format("   -> %s %s CHF", e.getName(), e.getPrice().toString());
+        return String.format("   -> %s:  %s CHF", e.getName(), e.getPrice());
     }
 
     private String formatOffering(Offering offering) {
-        return String.format("%s %s :%s CHF", offering.getType().getDescription(), offering.getSize() == null ? "" : offering.getSize(), offering.getPrice());
+        return String.format("%s: %s CHF", offering.getName(), offering.getPrice());
     }
 
 }

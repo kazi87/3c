@@ -7,7 +7,6 @@ import com.kazi.model.Type;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -16,17 +15,17 @@ import java.util.stream.Collectors;
 public class InventoryRepository {
 
     private final static List<Extra> EXTRAS = List.of(
-                    new Extra(1, "Extra Milk", new BigDecimal("0.30"), Type.COFFEE),
-                    new Extra(2, "Foamed milk", new BigDecimal("0.50"), Type.COFFEE),
-                    new Extra(3, "Special roast coffee", new BigDecimal("0.90"), Type.COFFEE)
+                    new Extra(1, "Extra Milk", Type.COFFEE, new BigDecimal("0.30")),
+                    new Extra(2, "Foamed milk", Type.COFFEE, new BigDecimal("0.50")),
+                    new Extra(3, "Special roast coffee", Type.COFFEE, new BigDecimal("0.90"))
 
     );
     public static List<Offering> OFFERINGS = List.of(
-                    new Offering(1, Type.COFFEE, "small", new BigDecimal("2.50")),
-                    new Offering(2, Type.COFFEE, "medium", new BigDecimal("3.00")),
-                    new Offering(3, Type.COFFEE, "large", new BigDecimal("3.50")),
-                    new Offering(4, Type.ROLL, new BigDecimal("4.50")),
-                    new Offering(5, Type.JUICE, new BigDecimal("3.95"))
+                    new Offering(1, "Small Coffee", Type.COFFEE, new BigDecimal("2.50")),
+                    new Offering(2, "Medium Coffee", Type.COFFEE, new BigDecimal("3.00")),
+                    new Offering(3, "Large Coffee", Type.COFFEE, new BigDecimal("3.50")),
+                    new Offering(4, "Bacon Roll", Type.ROLL, new BigDecimal("4.50")),
+                    new Offering(5, "Freshly squeezed orange juice", Type.JUICE, new BigDecimal("3.95"))
     );
 
     public List<Extra> getExtras(List<Integer> ids) {
@@ -34,7 +33,7 @@ public class InventoryRepository {
                         .filter(e -> ids.contains(e.getId()))
                         .collect(Collectors.toList());
         if (result.size() != ids.size()) {
-            throw new IllegalArgumentException("Requested not existing extras");
+            throw new IllegalArgumentException("Missing Extras!");
         }
         return result;
     }

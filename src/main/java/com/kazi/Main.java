@@ -10,15 +10,16 @@ import java.util.stream.Collectors;
 
 public class Main {
     private final static InventoryRepository repository = new InventoryRepository();
-    private final static ReceiptService service = new ReceiptService(repository, new SimplePricePolicy());
+    private final static ReceiptService service = new ReceiptService(repository);
     private final static OrderInputParser parser = new OrderInputParser();
+    private static final SimplePricePolicy pricePolicy = new SimplePricePolicy();
 
     public static void main(String[] args) {
         if (args.length == 0) {
             printHelp();
         } else {
             Order order = parser.parse(args);
-            System.out.println(service.generateReceipt(order));
+            System.out.println(service.generateReceipt(order, pricePolicy));
         }
     }
 

@@ -8,32 +8,30 @@ public final class Offering {
 
     private final Integer id;
 
-    private final Type type;
+    private final String name;
 
-    private final String size;
+    private final Type type;
 
     private final BigDecimal price;
 
-    public Offering(Integer id, Type type, String size, BigDecimal price) {
-        if (price.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("Price can not be negative");
+    public Offering(Integer id, String name, Type type, BigDecimal price) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("Id has to be positive");
+        }
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Invalid name");
+        }
+        if (price == null || price.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Price nas to be a positive number");
         }
         if (type == null) {
             throw new IllegalArgumentException("Type can not be null");
         }
 
-        if (id == null || id <= 0) {
-            throw new IllegalArgumentException("Id has to be positive");
-        }
-
         this.id = id;
+        this.name = name;
         this.type = type;
-        this.size = size;
         this.price = price;
-    }
-
-    public Offering(Integer id, Type type, BigDecimal price) {
-        this(id, type, null, price);
     }
 
     public int getId() {
@@ -48,16 +46,16 @@ public final class Offering {
         return price;
     }
 
-    public String getSize() {
-        return size;
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ")
                         .add("id=" + id)
+                        .add("name='" + name + "'")
                         .add("type=" + type)
-                        .add("size='" + size + "'")
                         .add("price=" + price)
                         .toString();
     }
@@ -67,11 +65,11 @@ public final class Offering {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Offering offering = (Offering) o;
-        return id.equals(offering.id) && type == offering.type && size.equals(offering.size) && price.equals(offering.price);
+        return id.equals(offering.id) && name.equals(offering.name) && type == offering.type && price.equals(offering.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, size, price);
+        return Objects.hash(id, name, type, price);
     }
 }

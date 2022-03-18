@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SimplePricePolicyTest {
 
     public static final BigDecimal PRICE_ONE = new BigDecimal("1.00");
-    public static final Offering OFFERING = new Offering(1, Type.COFFEE, PRICE_ONE);
-    public static final Extra EXTRA = new Extra(1, "test", PRICE_ONE, Type.COFFEE);
+    public static final Offering OFFERING = new Offering(1, "test", Type.COFFEE, PRICE_ONE);
+    public static final Extra EXTRA = new Extra(1, "test", Type.COFFEE, PRICE_ONE);
 
     private SimplePricePolicy testObj = new SimplePricePolicy();
 
@@ -29,9 +29,9 @@ class SimplePricePolicyTest {
                         Arguments.of(List.of(OFFERING), List.of(), new BigDecimal("1.00")),
                         Arguments.of(List.of(OFFERING), List.of(EXTRA), new BigDecimal("2.00")),
                         Arguments.of(List.of(OFFERING), List.of(EXTRA, EXTRA, EXTRA), new BigDecimal("4.00")),
-                        Arguments.of(List.of(new Offering(1, Type.COFFEE, new BigDecimal("1.11"))), List.of(), new BigDecimal("1.11")),
-                        Arguments.of(List.of(new Offering(1, Type.COFFEE, new BigDecimal("1.111111"))), List.of(), new BigDecimal("1.11")),
-                        Arguments.of(List.of(new Offering(1, Type.COFFEE, new BigDecimal("1"))), List.of(), new BigDecimal("1.00"))
+                        Arguments.of(List.of(new Offering(1, "test", Type.COFFEE, new BigDecimal("1.11"))), List.of(), new BigDecimal("1.11")),
+                        Arguments.of(List.of(new Offering(1, "test", Type.COFFEE, new BigDecimal("1.111111"))), List.of(), new BigDecimal("1.11")),
+                        Arguments.of(List.of(new Offering(1, "test", Type.COFFEE, new BigDecimal("1"))), List.of(), new BigDecimal("1.00"))
 
         );
     }

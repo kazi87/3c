@@ -14,7 +14,7 @@ public class Extra {
 
     private final Type type;
 
-    public Extra(Integer id, String name, BigDecimal price, Type type) {
+    public Extra(Integer id, String name, Type type, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.price = price;
